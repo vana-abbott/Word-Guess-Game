@@ -4,10 +4,11 @@ var WordBank = ["dalmatian", "corgi", "daschund", "boxer", "poodle", "bulldog",
  var userGuesses = [];
  var win = 0;
  var wrongLetters = [];
- var guessesLeft = 9 ; 
+ var guessesLeft = 10; 
  var random;
  var underScores = [];
  var winCounter = 0;
+ var alphabet = 'abcdefghijklmnopqrstuv';
 // Funtion //
 
 function startGame (){
@@ -21,41 +22,40 @@ function startGame (){
     document.getElementById('word-blanks').innerHTML = underScores.join(" ");
     console.log(underScores)
 
-    wrongLetters = []; 
-    guessesLeft = 10;
-
     document.getElementById("guesses-left").textContent =  guessesLeft;
 
 }
 function winLose(){
     if(winCounter === random.length){
-    alert("Winner");
-    start();
-}
+        console.log('u win');
+        alert("Winner");
+    }
     else if(guessesLeft === 0){
         alert("that's ruff! try again");
-        start();
     }
 
 }
 
 document.onkeyup = function(event){
-    userGuesses = event.key;
-// This will check if their guess is correct// 
-    if(random.indexof(userGuesses) > -1){
-        for(var i = 0; i < random.length; i++){
-            if(random[0] === userGuesses){
-                underScores[i] =  userGuesses;
-                console.log(underScores);
-                winCounter++;
-                winLose();
+    userGuesses = event.key.toLowerCase();
+
+    if (alphabet.indexOf(userGuesses) >= 0) {
+        // This will check if their guess is correct// 
+        if(random.indexOf(userGuesses) > -1){
+            for(var i = 0; i < random.length; i++){
+                if(random[i] === userGuesses){
+                    underScores[i] =  userGuesses;
+                    console.log(underScores);
+                    winCounter++;
+                }
             }
         }
-    }
-    else{
-        wrongLetters.push(userGuessesl);
-        guessesLeft--; 
-        console.log(wrongLetters);
+        else{
+            wrongLetters.push(userGuesses);
+            guessesLeft--; 
+            console.log(wrongLetters);
+        }
+        winLose();
     }
 }
 
