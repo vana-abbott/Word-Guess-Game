@@ -45,6 +45,7 @@ document.onkeyup = function(event){
             for(var i = 0; i < random.length; i++){
                 if(random[i] === userGuesses){
                     underScores[i] =  userGuesses;
+                    document.getElementById('word-blanks').innerHTML = underScores.join(" ");
                     console.log(underScores);
                     winCounter++;
                 }
@@ -53,6 +54,8 @@ document.onkeyup = function(event){
         else{
             wrongLetters.push(userGuesses);
             guessesLeft--; 
+
+            document.getElementById("guesses-left").textContent =  guessesLeft;
             console.log(wrongLetters);
         }
         winLose();
